@@ -19,7 +19,6 @@ class MiroClient(val properties: MiroProperties) {
                 ignoreUnknownKeys = true
             })
         }
-        ResponseObserver { response -> println("HTTP status : ${response.status.value}") }
     }
 
     /**
@@ -32,7 +31,7 @@ class MiroClient(val properties: MiroProperties) {
                 append(HttpHeaders.Authorization, "Bearer ${properties.apiKey}")
             }
         }
-        println(board)
+        board;
     }
 
     /**
