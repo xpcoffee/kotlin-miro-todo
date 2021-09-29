@@ -31,7 +31,7 @@ Quick links for reference.
 
 Just following guide here: https://kotlinlang.org/docs/kmm-use-ktor-for-networking.html#connect-ktor
 
-## 2021-09-29 Project layout/structure
+### 2021-09-29 Project layout/structure
 
 Using structure convention laid out here https://kotlinlang.org/docs/gradle.html#kotlin-and-java-sources
 
