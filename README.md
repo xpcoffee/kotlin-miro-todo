@@ -19,7 +19,7 @@ a board ID.
 # src/main/resources/miro.properties
 board=<Miro board ID>
 accessToken=<Miro accessToken>
-frames=Comma,Separated,List,Of,Frame,Titles
+frames=Comma,Separated,List,Of,Frame,Titles,Containing,TODO,Stickers,In,Your,Board
 ```
 
 ## Miro API
