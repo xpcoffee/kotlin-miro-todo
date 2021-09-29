@@ -1,10 +1,9 @@
-import io.ktor.client.*;
+import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.observer.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.*
 import kotlinx.serialization.*
@@ -16,8 +15,8 @@ import java.util.*
  * Entry point for the app
  */
 fun main() = runBlocking {
-    val miroProperties = getMiroProperties();
-    println(miroProperties);
+    val miroProperties = getMiroProperties()
+    println(miroProperties)
 
     if (miroProperties != null) {
         callMiro(miroProperties)
@@ -29,10 +28,10 @@ fun main() = runBlocking {
  */
 fun getMiroProperties(): MiroProperties? {
     val miroPropertiesFile = "miro.properties"
-    val propertiesPath = object {}.javaClass.getResource(miroPropertiesFile)?.path;
+    val propertiesPath = object {}.javaClass.getResource(miroPropertiesFile)?.path
     if (propertiesPath == null) {
         println("Unable to find: $miroPropertiesFile")
-        return null;
+        return null
     }
 
     val properties = Properties()
@@ -41,7 +40,7 @@ fun getMiroProperties(): MiroProperties? {
     return MiroProperties(
         board = properties.getProperty("board"),
         apiKey = properties.getProperty("accessToken")
-    );
+    )
 }
 
 /**
@@ -64,16 +63,16 @@ suspend fun callMiro(properties: MiroProperties): Unit = coroutineScope {
             append(HttpHeaders.Authorization, "Bearer ${properties.apiKey}")
         }
     }
-    println(board);
+    println(board)
 }
 
 /**
  * Dataclass that models Miro configuration
  */
-data class MiroProperties(val board: String, val apiKey: String);
+data class MiroProperties(val board: String, val apiKey: String)
 
 /**
  * Board data from Miro API
  */
 @Serializable
-data class MiroBoard(val type: String, val name: String);
+data class MiroBoard(val type: String, val name: String)
