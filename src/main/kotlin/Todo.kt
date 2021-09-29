@@ -8,6 +8,6 @@ fun main() = runBlocking {
 
     if (miroProperties != null) {
         val client = MiroClient(miroProperties)
-        client.describeBoard()
+        client.describeFrames();
     }
 }

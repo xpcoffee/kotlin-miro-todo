@@ -6,7 +6,6 @@ import io.ktor.client.features.observer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.coroutineScope
-import kotlinx.serialization.json.Json
 
 /**
  * Client which returns data from the Miro API
@@ -34,5 +33,18 @@ class MiroClient(val properties: MiroProperties) {
             }
         }
         println(board)
+    }
+
+    /**
+     * Describe the Miro board
+     */
+    suspend fun describeFrames(): List<MiroFrame> = coroutineScope {
+        val frames: DescribeMiroFramesResponse  = httpClient.get("https://api.miro.com/v1/boards/${properties.board}/widgets/?widgetType=frame") {
+            headers {
+                append(HttpHeaders.Accept, ContentType.Application.Json)
+                append(HttpHeaders.Authorization, "Bearer ${properties.apiKey}")
+            }
+        }
+        frames.data;
     }
 }
