@@ -36,10 +36,23 @@ class MiroClient(val properties: MiroProperties) {
     }
 
     /**
-     * Describe the Miro board
+     * Describe frames in the Miro board
      */
     suspend fun describeFrames(): List<MiroFrame> = coroutineScope {
         val frames: DescribeMiroFramesResponse  = httpClient.get("https://api.miro.com/v1/boards/${properties.board}/widgets/?widgetType=frame") {
+            headers {
+                append(HttpHeaders.Accept, ContentType.Application.Json)
+                append(HttpHeaders.Authorization, "Bearer ${properties.apiKey}")
+            }
+        }
+        frames.data;
+    }
+
+    /**
+     * Describe stickers in the Miro board
+     */
+    suspend fun describeStickers(): List<MiroSticker> = coroutineScope {
+        val frames: DescribeMiroStickersResponse  = httpClient.get("https://api.miro.com/v1/boards/${properties.board}/widgets/?widgetType=sticker") {
             headers {
                 append(HttpHeaders.Accept, ContentType.Application.Json)
                 append(HttpHeaders.Authorization, "Bearer ${properties.apiKey}")
